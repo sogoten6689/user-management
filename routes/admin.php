@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\TagController;
 
 Auth::routes();
 
@@ -23,4 +26,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('user-ban-unban/{id}/{status}', 'UserController@banUnban')->name('user.banUnban');
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
+
+    Route::resource('posts', PostController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('tags', TagController::class);
 });

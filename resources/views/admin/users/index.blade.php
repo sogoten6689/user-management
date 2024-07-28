@@ -70,12 +70,14 @@
                                 {{ $user->created_at->format('Y-m-d') ?? '' }}
                             </td>
                             <td>
+                                <a href="{{ route('admin.users.show', $user->id) }}" class="badge bg-info">Xem</a> 
+                                <a href="{{ route('admin.users.edit', $user->id) }}" class="badge bg-info">Sửa</a> 
                                 @if (auth()->user()->hasRole('Admin'))
-                                @if($user->status)
-                                    <a href="{{ route('admin.user.banUnban', ['id' => $user->id, 'status' => 0]) }}" class="badge bg-danger">Block</a>
-                                @else
-                                    <a href="{{ route('admin.user.banUnban', ['id' => $user->id, 'status' => 1]) }}" class="badge bg-info">Unblock</a>
-                                @endif
+                                    @if($user->status)
+                                        <a href="{{ route('admin.user.banUnban', ['id' => $user->id, 'status' => 0]) }}" class="badge bg-danger">Block</a>
+                                    @else
+                                        <a href="{{ route('admin.user.banUnban', ['id' => $user->id, 'status' => 1]) }}" class="badge bg-info">Unblock</a>
+                                    @endif
                                 @endif
                             </td>
                         </tr>

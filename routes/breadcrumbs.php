@@ -4,17 +4,27 @@ use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\User;
+
 
 Breadcrumbs::for('admin.index', function (BreadcrumbTrail $trail): void {
-    $trail->push('Dashboard', route('admin.index'));
+    $trail->push('Trang chủ', route('admin.index'));
 });
 Breadcrumbs::for('admin.users.index', function (BreadcrumbTrail $trail): void {
     $trail->parent('admin.index');
-    $trail->push('Users', route('admin.users.index'));
+    $trail->push('Người Dùng', route('admin.users.index'));
 });
 Breadcrumbs::for('admin.users.create', function (BreadcrumbTrail $trail): void {
     $trail->parent('admin.users.index');
-    $trail->push('Add new user', route('admin.users.create'));
+    $trail->push('Thêm Người Dùng', route('admin.users.create'));
+});
+Breadcrumbs::for('admin.users.edit', function (BreadcrumbTrail $trail, User $user): void {
+    $trail->parent('admin.users.index');
+    $trail->push('Cập Nhật Người Dùng', route('admin.users.edit', $user));
+});
+Breadcrumbs::for('admin.users.show', function (BreadcrumbTrail $trail, User $user): void {
+    $trail->parent('admin.users.index');
+    $trail->push('Chi Tiết Người Dùng', route('admin.users.show', $user));
 });
 // Role
 Breadcrumbs::for('admin.roles.index', function (BreadcrumbTrail $trail): void {
