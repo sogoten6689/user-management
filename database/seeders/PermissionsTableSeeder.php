@@ -26,6 +26,9 @@ class PermissionsTableSeeder extends Seeder
             'permission_create',
             'permission_edit',
             'permission_delete',
+
+            'music_access',
+            'group_access',
         ];
 
         foreach ($permissions as $permission) {

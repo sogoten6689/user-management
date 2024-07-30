@@ -41,6 +41,35 @@ Breadcrumbs::for('admin.roles.edit', function (BreadcrumbTrail $trail, Role $pos
 
     $trail->push($post->name, route('admin.roles.edit', $post));
 });
+// post
+Breadcrumbs::for('admin.posts.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('admin.index');
+    $trail->push('Bài Viết', route('admin.posts.index'));
+});
+// categories
+Breadcrumbs::for('admin.categories.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('admin.index');
+    $trail->push('Phân Loại', route('admin.categories.index'));
+});
+// tag
+Breadcrumbs::for('admin.tags.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('admin.index');
+    $trail->push('Gắn thẻ', route('admin.tags.index'));
+});
+// music
+Breadcrumbs::for('admin.musics.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('admin.index');
+    $trail->push('Bản Nhạc', route('admin.musics.index'));
+});
+// Group
+Breadcrumbs::for('admin.groups.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('admin.index');
+    $trail->push('Đội Nhóm', route('admin.groups.index'));
+});
+Breadcrumbs::for('admin.groups.create', function (BreadcrumbTrail $trail): void {
+    $trail->parent('admin.groups.index');
+    $trail->push('Tạo Nhóm', route('admin.groups.create'));
+});
 // Permission
 Breadcrumbs::for('admin.permissions.index', function (BreadcrumbTrail $trail): void {
     $trail->parent('admin.index');

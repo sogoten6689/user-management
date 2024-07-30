@@ -44,7 +44,25 @@
                         </a>
                     </li>
                 @endcan
-                @can('post_access')
+                @can('music_access')
+                    <li class="nav-item">
+                        <a class="nav-link {{ (request()->is('admin/musics*')) ? 'active' : '' }}"
+                           href="{{ route('admin.musics.index') }}">
+                            <span data-feather="file" class="align-text-bottom"></span>
+                            Bản nhạc
+                        </a>
+                    </li>
+                @endcan
+                @can('group_access')
+                    <li class="nav-item">
+                        <a class="nav-link {{ (request()->is('admin/groups*')) ? 'active' : '' }}"
+                           href="{{ route('admin.groups.index') }}">
+                            <span data-feather="grid" class="align-text-bottom"></span>
+                            Đội Nhóm
+                        </a>
+                    </li>
+                @endcan
+                {{-- @can('post_access')
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('admin/posts*')) ? 'active' : '' }}"
                            href="{{ route('admin.posts.index') }}">
@@ -52,8 +70,8 @@
                             Bài viết
                         </a>
                     </li>
-                @endcan
-                @can('category_access')
+                @endcan --}}
+                {{-- @can('category_access')
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('admin/categories*')) ? 'active' : '' }}"
                            href="{{ route('admin.categories.index') }}">
@@ -61,8 +79,8 @@
                             Phân loại
                         </a>
                     </li>
-                @endcan
-                @can('tag_access')
+                @endcan --}}
+                {{-- @can('tag_access')
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('admin/tags*')) ? 'active' : '' }}"
                            href="{{ route('admin.tags.index') }}">
@@ -70,7 +88,7 @@
                             Gắn thẻ
                         </a>
                     </li>
-                @endcan
+                @endcan --}}
             </ul>
 
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
