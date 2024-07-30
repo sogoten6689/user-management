@@ -3,10 +3,11 @@
 
     <div class="card border-0 shadow-sm">
         <div class="card-header">
-            Tạo Đội Nhóm
+            Chỉnh Sửa Nhóm
         </div>
-        <form action="{{ route("admin.groups.store")}}" method="POST">
+        <form action="{{ route("admin.groups.update", [$group->id])}}" method="POST">
             @csrf
+            @method('PUT')
             <div class="card-body">
                 <div class="mb-2">
                     <label for="title">Tên Nhóm*</label>

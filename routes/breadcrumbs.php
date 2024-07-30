@@ -5,6 +5,7 @@ use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
+use App\Models\Group;
 
 
 Breadcrumbs::for('admin.index', function (BreadcrumbTrail $trail): void {
@@ -69,6 +70,14 @@ Breadcrumbs::for('admin.groups.index', function (BreadcrumbTrail $trail): void {
 Breadcrumbs::for('admin.groups.create', function (BreadcrumbTrail $trail): void {
     $trail->parent('admin.groups.index');
     $trail->push('Tạo Nhóm', route('admin.groups.create'));
+});
+Breadcrumbs::for('admin.groups.edit', function (BreadcrumbTrail $trail, Group $group): void {
+    $trail->parent('admin.groups.index');
+    $trail->push($group->name, route('admin.groups.edit', $group));
+});
+Breadcrumbs::for('admin.groups.show', function (BreadcrumbTrail $trail, Group $group): void {
+    $trail->parent('admin.groups.index');
+    $trail->push($group->name, route('admin.groups.show', $group));
 });
 // Permission
 Breadcrumbs::for('admin.permissions.index', function (BreadcrumbTrail $trail): void {

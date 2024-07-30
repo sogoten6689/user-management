@@ -52,8 +52,27 @@
                                 {{ $group->created_at->format('Y-m-d') ?? '' }}
                             </td>
                             <td>
-                                <a href="{{ route('admin.groups.show', $group->id) }}" class="badge bg-info">Xem</a> 
-                                <a href="{{ route('admin.groups.edit', $group->id) }}" class="badge bg-info">Sửa</a> 
+                                <a href="{{ route('admin.groups.show', $group->id) }}" class="badge bg-info">
+                                    <span data-feather="eye" class="align-text-bottom"></span>
+                                </a> 
+                                <a href="{{ route('admin.groups.edit', $group->id) }}" class="badge bg-warning">
+                                    <span data-feather="edit" class="align-text-bottom"></span>
+                                </a> 
+                                <form id="delete-form-{{ $group->id }}" method="post"
+                                      action="{{ route('admin.groups.destroy', $group->id) }}"
+                                      style="display: none">
+                                    {{csrf_field()}}
+                                    {{ method_field('DELETE') }}
+                                </form>
+                                <a href="javascript:void(0)" class="badge bg-danger text-white" onclick="
+                                    if(confirm('Bạn có chắc muốn xoá nhóm?'))
+                                    {
+                                    event.preventDefault();
+                                    document.getElementById('delete-form-{{ $group->id }}').submit();
+                                    }">
+                                    <span data-feather="trash-2" class="align-text-bottom"></span>
+                                    
+                                </a>
                             </td>
                         </tr>
                     @endforeach

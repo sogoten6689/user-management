@@ -77,23 +77,47 @@ class GroupController extends Controller
      */
     public function edit(Group  $group)
     {
+        abort_if(Gate::denies('group_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return view('admin.groups.edit', compact('group'));
-        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Group  $group)
     {
         //
+        //
+        $validatedData = $request->validate([
+            // 'name' => 'required|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/|max:255',
+            'name' => 'required',
+            'description' => 'required',
+            'address' => 'required',
+        ]);
+
+
+        $group->name = $request->name;
+        $group->description = $request->description;
+        $group->address = $request->address;
+
+        if ($group->save()) {
+            flash()->addSuccess('Cập nhật Nhóm Thành Công!');
+            return redirect()->route('admin.groups.index');
+        }
+        flash()->addError('Cập nhật Nhóm không thành công!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Group  $group)
     {
-        //
+        abort_if(Gate::denies('group_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        if ($group->delete()) {
+            flash()->addSuccess('Xóa Nhóm Thành Công!');
+            return redirect()->route('admin.groups.index');
+        }
+        flash()->addError('Xóa Nhóm Thất bại!');
+        return redirect()->route('admin.groups.index');
     }
 }
