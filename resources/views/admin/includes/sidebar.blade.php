@@ -44,21 +44,21 @@
                         </a>
                     </li>
                 @endcan
-                @can('music_access')
-                    <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('admin/musics*')) ? 'active' : '' }}"
-                           href="{{ route('admin.musics.index') }}">
-                            <span data-feather="file" class="align-text-bottom"></span>
-                            Bản nhạc
-                        </a>
-                    </li>
-                @endcan
                 @can('group_access')
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('admin/groups*')) ? 'active' : '' }}"
                            href="{{ route('admin.groups.index') }}">
                             <span data-feather="grid" class="align-text-bottom"></span>
                             Đội Nhóm
+                        </a>
+                    </li>
+                @endcan
+                @can('music_access')
+                    <li class="nav-item">
+                        <a class="nav-link {{ (request()->is('admin/musics*')) ? 'active' : '' }}"
+                           href="{{ route('admin.musics.index') }}">
+                            <span data-feather="file" class="align-text-bottom"></span>
+                            Bản nhạc
                         </a>
                     </li>
                 @endcan

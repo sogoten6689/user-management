@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Spatie\Permission\PermissionRegistrar;
 
-class CreateMusicsTable extends Migration
+class CreateMusicTable extends Migration
 {
    
     /**
@@ -13,13 +13,13 @@ class CreateMusicsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('musics', function (Blueprint $table) {
+        Schema::create('music', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->string('version');
+            $table->string('description')->nullable();
+            $table->string('version')->nullable();
             $table->string('music_path');
-            $table->string('doc_path');
+            $table->string('doc_path')->nullable();
             $table->integer('is_publish')->default(1);
             $table->integer('status')->default(1);
             $table->unsignedBigInteger('create_by');

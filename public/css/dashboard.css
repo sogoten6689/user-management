@@ -204,6 +204,18 @@ main .card {
     border: solid #ddd 1px;
 }
 
+.select2-results__option--selectable{
+    background-color: #4fc9da !important;
+    border-bottom: 1px #ddd solid;
+}
+.select2-results__option--selectable:hover {
+    background-color: #d07f0d !important;
+}
+
+.select2-selection__choice {
+    background-color: #4fc9da !important;
+}
+
 table tr th, td {
     background: transparent !important;
 }

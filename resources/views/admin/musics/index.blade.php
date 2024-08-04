@@ -1,28 +1,87 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="row">
-        <div class="col-12 col-sm-6 col-xxl-3 d-flex mb-4">
-            <div class="card illustration flex-fill">
-                <div class="card-body p-0 d-flex flex-fill">
-                    <div class="row g-0 w-100">
-                        <div class="col-6">
-                            <div class="illustration-text p-3 m-1">
-                                <h4 class="illustration-text">Welcome Back, {{ auth()->user()->name }}!</h4>
-                                @php
-                                    $roles = auth()->user()->getRoleNames()->toArray();
-                                @endphp
-                                <p class="mb-0">{{ implode(" ", $roles) }}</p>
-                            </div>
-                        </div>
-                        <div class="col-6 align-self-end text-end">
-                            <img src="{{ asset('images/admin/customer-support.png') }}" alt="Customer Support"
-                                 class="img-fluid illustration-img">
-                        </div>
-                    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="float-start">
+                Danh Sách Bài Hát
+            </div>
+            @can('permission_create')
+                <div class="float-end">
+                    <a class="btn btn-success btn-sm text-white" href="{{ route("admin.musics.create") }}">
+                        Thêm bài hát mới
+                    </a>
                 </div>
+            @endcan
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Tên bài
+                        </th>
+                        <th>
+                            link
+                        </th>
+                        <th>
+                            Ngày tạo
+                        </th>
+                        <th>
+                            Thao tác
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($musics as $key => $music)
+                        <tr data-entry-id="{{ $music->id }}">
+                            <td>
+                                {{ $music->id ?? '' }}
+                            </td>
+                            <td>
+                                {{ $music->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $music->description ?? '' }}
+                            </td>
+                            <td>
+                                {{ $music->created_at->format('Y-m-d') ?? '' }}
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.musics.show', $music->id) }}" class="badge bg-info">
+                                    <span data-feather="eye" class="align-text-bottom"></span>
+                                </a> 
+                                <a href="{{ route('admin.musics.edit', $music->id) }}" class="badge bg-warning">
+                                    <span data-feather="edit" class="align-text-bottom"></span>
+                                </a> 
+                                <form id="delete-form-{{ $music->id }}" method="post"
+                                      action="{{ route('admin.musics.destroy', $music->id) }}"
+                                      style="display: none">
+                                    {{csrf_field()}}
+                                    {{ method_field('DELETE') }}
+                                </form>
+                                <a href="javascript:void(0)" class="badge bg-danger text-white" onclick="
+                                    if(confirm('Bạn có chắc muốn xoá bài hát?'))
+                                    {
+                                    event.preventDefault();
+                                    document.getElementById('delete-form-{{ $music->id }}').submit();
+                                    }">
+                                    <span data-feather="trash-2" class="align-text-bottom"></span>
+                                    
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
+        <div class="card-footer clearfix">
+            {{ $musics->links() }}
+        </div>
     </div>
-    
 @endsection

@@ -62,6 +62,10 @@ Breadcrumbs::for('admin.musics.index', function (BreadcrumbTrail $trail): void {
     $trail->parent('admin.index');
     $trail->push('Bản Nhạc', route('admin.musics.index'));
 });
+Breadcrumbs::for('admin.musics.create', function (BreadcrumbTrail $trail): void {
+    $trail->parent('admin.musics.index');
+    $trail->push('Tải bài nhạc', route('admin.musics.create'));
+});
 // Group
 Breadcrumbs::for('admin.groups.index', function (BreadcrumbTrail $trail): void {
     $trail->parent('admin.index');
