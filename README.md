@@ -28,3 +28,12 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+CREATE USER 'cadoan_db_user'@'localhost' IDENTIFIED BY '2024@CaDoan';
+create database cadoan_database;
+GRANT ALL on cadoan_database.* to cadoan_db_user@localhost;
+
+
+sudo chown -R www-data:www-data /var/www/user-management/storage /var/www/user-management/bootstrap/cache
+
+sudo chmod -R 775 /var/www/user-management/storage /var/www/user-management/bootstrap/cache
