@@ -6,7 +6,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
 use App\Models\Group;
-
+use App\Models\Music;
 
 Breadcrumbs::for('admin.index', function (BreadcrumbTrail $trail): void {
     $trail->push('Trang chủ', route('admin.index'));
@@ -65,6 +65,14 @@ Breadcrumbs::for('admin.musics.index', function (BreadcrumbTrail $trail): void {
 Breadcrumbs::for('admin.musics.create', function (BreadcrumbTrail $trail): void {
     $trail->parent('admin.musics.index');
     $trail->push('Tải bài nhạc', route('admin.musics.create'));
+});
+Breadcrumbs::for('admin.musics.show', function (BreadcrumbTrail $trail, Music $music): void {
+    $trail->parent('admin.musics.index');
+    $trail->push($music->song_name, route('admin.musics.show', $music));
+});
+Breadcrumbs::for('admin.musics.edit', function (BreadcrumbTrail $trail, Music $music): void {
+    $trail->parent('admin.musics.index');
+    $trail->push($music->song_name, route('admin.musics.edit', $music));
 });
 // Group
 Breadcrumbs::for('admin.groups.index', function (BreadcrumbTrail $trail): void {

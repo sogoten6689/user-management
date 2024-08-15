@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -54,6 +55,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->assignRole($request->role);
 
         if ($user->save()) {
             flash()->addSuccess('User created successfully.');
@@ -71,7 +73,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show', compact('user'));
+
+        $roles = Role::all();
+        return view('admin.users.show', compact('user', 'roles'));
     }
 
     /**
@@ -82,7 +86,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact('user'));
+        $roles = Role::all();
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -92,9 +97,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        
+        $validatedData = $request->validate([
+            'name' => 'required|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/|max:255',
+            // 'email' => 'required|email|unique:users,email|max:255',
+            // 'role' => 'required|exists:roles,name',
+        ]);
+
+        $user->update($validatedData);
+        $user->syncRoles([$request->role]);
+        // $user->syncRoles($request->role);
+
+
+        if ($user->save()) {
+            flash()->addSuccess('Cập nhật Thành Công!');
+            return redirect()->route('admin.users.index');
+        }
+
+        flash()->addError('Cập nhật không thành công!');
+
     }
 
     /**

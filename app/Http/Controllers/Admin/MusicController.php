@@ -36,57 +36,90 @@ class MusicController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+
         $request->validate([
-            'mp3file' => 'required|mimetypes:audio/mp3|max:10000', // max 10MB
+            'name' => 'required',
         ]);
 
+        $music = new Music();
+        $music->name = $request->name;
 
-        $filePath = $request->file('mp3file')->store('public');
+        $validatedData = $request->validate([
+            'song_name' => 'required|string',
+            'author' => 'nullable|string',
+            'first_sentence' => 'nullable|string',
+            'link_pdf' => 'nullable|string',
+            'link_content' => 'nullable|string',
+            'category' => 'nullable|string',
+            'book' => 'nullable|string',
+            'notes' => 'nullable|string',
+            'public' => 'required|boolean',
+        ]);
 
-        if ($request->file('mp3file')) {
-            $filePath = $request->file('mp3file')->store('public');
+        $validatedData['link_pdf'] = array_map('trim', explode(',', $request->input('link_pdf', '')));
+        $validatedData['link_content'] = array_map('trim', explode(',', $request->input('link_content', '')));
 
-            $mp3Upload = new Music();
-            $mp3Upload->music_path = $filePath;
-            $mp3Upload->save();
+        $music = Music::create($validatedData);
 
-            return redirect()->back()->with('success', 'File uploaded successfully');
-        }
+        return redirect()->back()->with('success', 'File uploaded successfully');
 
-        return redirect()->back()->with('error', 'Failed to upload file');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Music $music)
     {
-        return view('admin.musics.show');
-        //
+        return view('admin.musics.show', compact('music'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Music $music)
     {
-        return view('admin.musics.edit');
+        return view('admin.musics.edit', compact('music'));
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Music $music)
     {
         //
+
+        $validatedData = $request->validate([
+            'song_name' => 'required|string',
+            'author' => 'nullable|string',
+            'first_sentence' => 'nullable|string',
+            'link_pdf' => 'nullable|string',
+            'link_content' => 'nullable|string',
+            'category' => 'nullable|string',
+            'book' => 'nullable|string',
+            'notes' => 'nullable|string',
+            'public' => 'required|boolean|in:0,1',
+        ]);
+
+        $validatedData['link_pdf'] = array_map('trim', explode(',', $request->input('link_pdf', '')));
+        $validatedData['link_content'] = array_map('trim', explode(',', $request->input('link_content', '')));
+
+
+        $music->update($validatedData);
+
+        return redirect()->back()->with('success', 'File uploaded successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Music $music)
     {
-        //
+
+        if ($music->created_by == Auth::user()->id ) {
+            $music->delete();
+            return redirect()->back()->with('success', 'File deleted successfully');
+        }
     }
 }

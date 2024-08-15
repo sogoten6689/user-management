@@ -19,8 +19,8 @@ class CreateGroupsTable extends Migration
             $table->string('description');
             $table->string('address');
             $table->integer('status')->default(1);
-            $table->unsignedBigInteger('create_by');
-            $table->foreign('create_by')->references('id')->on('users');
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users');
             $table->timestamps();
         });
     }
