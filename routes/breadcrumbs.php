@@ -6,6 +6,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
 use App\Models\Group;
+use App\Models\Event;
 use App\Models\Music;
 
 Breadcrumbs::for('admin.index', function (BreadcrumbTrail $trail): void {
@@ -73,6 +74,23 @@ Breadcrumbs::for('admin.musics.show', function (BreadcrumbTrail $trail, Music $m
 Breadcrumbs::for('admin.musics.edit', function (BreadcrumbTrail $trail, Music $music): void {
     $trail->parent('admin.musics.index');
     $trail->push($music->song_name, route('admin.musics.edit', $music));
+});
+// Event
+Breadcrumbs::for('admin.events.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('admin.index');
+    $trail->push('Chương Trình', route('admin.events.index'));
+});
+Breadcrumbs::for('admin.events.create', function (BreadcrumbTrail $trail): void {
+    $trail->parent('admin.events.index');
+    $trail->push('Tạo chương trình', route('admin.events.create'));
+});
+Breadcrumbs::for('admin.events.show', function (BreadcrumbTrail $trail, Event $event): void {
+    $trail->parent('admin.musics.index');
+    $trail->push($event->name, route('admin.events.show', $event));
+});
+Breadcrumbs::for('admin.events.edit', function (BreadcrumbTrail $trail, Event $event): void {
+    $trail->parent('admin.events.index');
+    $trail->push($event->name, route('admin.events.edit', $event));
 });
 // Group
 Breadcrumbs::for('admin.groups.index', function (BreadcrumbTrail $trail): void {

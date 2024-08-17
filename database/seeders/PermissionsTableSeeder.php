@@ -29,6 +29,7 @@ class PermissionsTableSeeder extends Seeder
 
             'music_access',
             'group_access',
+            'event_access',
         ];
 
         foreach ($permissions as $permission) {

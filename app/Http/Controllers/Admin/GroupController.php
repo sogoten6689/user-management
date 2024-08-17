@@ -53,7 +53,7 @@ class GroupController extends Controller
         $group->name = $request->name;
         $group->description = $request->description;
         $group->address = $request->address;
-        $group->create_by = $user->id;
+        $group->created_by = $user->id;
 
         if ($group->save()) {
             flash()->addSuccess('Tạo Nhóm Thành Công!');

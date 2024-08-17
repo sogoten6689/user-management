@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\MusicController;
 use App\Http\Controllers\Admin\GroupController;
+use App\Http\Controllers\Admin\EventController;
 
 Auth::routes();
 
@@ -34,4 +35,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::resource('tags', TagController::class);
     Route::resource('musics', MusicController::class);
     Route::resource('groups', GroupController::class);
+    Route::resource('events', EventController::class);
+
 });

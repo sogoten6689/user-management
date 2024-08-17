@@ -22,6 +22,7 @@
                             <th>#</th>
                             <th>Tên bài</th>
                             <th>Tác giả</th>
+                            <th>Người tạo</th>
                             <th>Thao Tác</th>
                         </tr>
                     </thead>
@@ -31,6 +32,9 @@
                                 <td>{{ $music->id }}</td>
                                 <td>{{ $music->song_name }}</td>
                                 <td>{{ $music->author }}</td>
+
+                            
+                                <td>{{ $music->creator->name ?? 'N/A' }}</td>
                                 <td>
                                     <a href="{{ route('admin.musics.show', $music->id) }}" class="btn btn-info">
                                         <span data-feather="eye" class="align-text-bottom"></span>

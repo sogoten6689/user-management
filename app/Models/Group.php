@@ -38,4 +38,9 @@ class Group extends Model
         // 'email_verified_at' => 'datetime',
         // 'password' => 'hashed',
     ];
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

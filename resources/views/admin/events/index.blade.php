@@ -4,12 +4,12 @@
     <div class="card">
         <div class="card-header">
             <div class="float-start">
-                Danh Sách Đội Nhóm
+                Danh Sách Chương Trình
             </div>
             @can('permission_create')
                 <div class="float-end">
-                    <a class="btn btn-success btn-sm text-white" href="{{ route("admin.groups.create") }}">
-                        Thêm nhóm mới
+                    <a class="btn btn-success btn-sm text-white" href="{{ route("admin.events.create") }}">
+                        Thêm Chương TRình
                     </a>
                 </div>
             @endcan
@@ -23,46 +23,46 @@
                             ID
                         </th>
                         <th>
-                            Tên Nhóm
+                            Tên Chương Trình
                         </th>
                         <th>
-                            Mô tả
+                            Ngày hoạt động
                         </th>
+                        <th>
+                            Người tạo
                         <th>
                             Ngày tạo
                         </th>
-                        <th>Người tạo</th>
                         <th>
                             Thao tác
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($groups as $key => $group)
-                        <tr data-entry-id="{{ $group->id }}">
+                    @foreach($events as $key => $event)
+                        <tr data-entry-id="{{ $event->id }}">
                             <td>
-                                {{ $group->id ?? '' }}
+                                {{ $event->id ?? '' }}
                             </td>
                             <td>
-                                {{ $group->name ?? '' }}
+                                {{ $event->name ?? '' }}
                             </td>
                             <td>
-                                {{ $group->description ?? '' }}
+                                {{ $event->date->format('Y-m-d') ?? '' }}
+                            </td>
+                            <td>{{ $event->creator->name ?? 'N/A' }}</td>
+                            <td>
+                                {{ $event->created_at->format('Y-m-d') ?? '' }}
                             </td>
                             <td>
-                                {{ $group->created_at->format('Y-m-d') ?? '' }}
-                            </td>
-                            <td>{{ $group->creator->name ?? 'N/A' }}</td>
-                            
-                            <td>
-                                <a href="{{ route('admin.groups.show', $group->id) }}" class="badge bg-info">
+                                <a href="{{ route('admin.events.show', $event->id) }}" class="badge bg-info">
                                     <span data-feather="eye" class="align-text-bottom"></span>
                                 </a> 
-                                <a href="{{ route('admin.groups.edit', $group->id) }}" class="badge bg-warning">
+                                <a href="{{ route('admin.events.edit', $event->id) }}" class="badge bg-warning">
                                     <span data-feather="edit" class="align-text-bottom"></span>
                                 </a> 
-                                <form id="delete-form-{{ $group->id }}" method="post"
-                                      action="{{ route('admin.groups.destroy', $group->id) }}"
+                                <form id="delete-form-{{ $event->id }}" method="post"
+                                      action="{{ route('admin.events.destroy', $event->id) }}"
                                       style="display: none">
                                     {{csrf_field()}}
                                     {{ method_field('DELETE') }}
@@ -71,7 +71,7 @@
                                     if(confirm('Bạn có chắc muốn xoá nhóm?'))
                                     {
                                     event.preventDefault();
-                                    document.getElementById('delete-form-{{ $group->id }}').submit();
+                                    document.getElementById('delete-form-{{ $event->id }}').submit();
                                     }">
                                     <span data-feather="trash-2" class="align-text-bottom"></span>
                                     
@@ -84,7 +84,7 @@
             </div>
         </div>
         <div class="card-footer clearfix">
-            {{ $groups->links() }}
+            {{ $events->links() }}
         </div>
     </div>
 @endsection
