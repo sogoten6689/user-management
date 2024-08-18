@@ -21,7 +21,7 @@ class EventController extends Controller
     public function index()
     {
         abort_if(Gate::denies('event_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $events = Event::latest()->paginate(15);
+        $events = Event::orderBy('date', 'desc')->paginate(15);
 
         return view('admin.events.index', compact('events'));
         //

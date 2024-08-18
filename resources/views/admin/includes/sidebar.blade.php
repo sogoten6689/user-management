@@ -66,7 +66,7 @@
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('admin/events*')) ? 'active' : '' }}"
                            href="{{ route('admin.events.index') }}">
-                            <span data-feather="file" class="align-text-bottom"></span>
+                            <span data-feather="calendar" class="align-text-bottom"></span>
                             Chương Trình
                         </a>
                     </li>
