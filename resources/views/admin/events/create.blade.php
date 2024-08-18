@@ -9,7 +9,7 @@
             @csrf
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 col-sm-6  mb-4">
+                    <div class="col-12 col-md-4  mb-4">
                         <div class="mb-2">
                             <label for="title">Tên Chương Trình*</label>
                             <input type="text" id="title" name="name" class="form-control @error('name') is-invalid @enderror"
@@ -21,7 +21,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6  mb-4">
+                    <div class="col-12 col-md-4  mb-4">
 
                         <div class="mb-2">
                             <label for="date">Ngày Chương Trình*</label>
@@ -33,6 +33,18 @@
                             </span>
                             @enderror
                         </div>
+                    </div>
+
+                    <div class="col-12 col-md-4  mb-4">
+                        <label for="start_time">Giờ Bắt Đầu</label>
+                        <input type="time" id="start_time" name="start_time" class="form-control @error('start_time') is-invalid @enderror"
+                            value="{{ old('start_time', isset($event) ? $event->start_time : '') }}">
+                        @error('start_time')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+
                     </div>
                 </div>
 

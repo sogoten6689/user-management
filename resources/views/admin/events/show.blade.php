@@ -9,7 +9,7 @@
             @csrf
             <div class="card-body">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <label for="name" class="form-label text-bold">
                             <b>
                             Tên Chương Trình*
@@ -17,11 +17,17 @@
                         </label>
                         <div> {{ isset($event) ? $event->name : '' }}</div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <label for="date"  class="form-label text-bold">
                             <b>Ngày Hoạt động*</b>
                         </label>
                         <div> {{ isset($event) ? $event->date->format('d/m/Y') : '' }}</div>
+                    </div>
+                    <div class="col-4">
+                        <label for="date"  class="form-label text-bold">
+                            <b>Thời gian bắt đầu*</b>
+                        </label>
+                        <div> {{ isset($event) ? $event->start_time->format('H:i') : '' }}</div>
                     </div>
                 </div>
 

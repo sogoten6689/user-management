@@ -19,12 +19,14 @@ class EventSeeder extends Seeder
         Event::create([
             'name' => 'Christmas Concert',
             'date' => '2024-12-25',
+            'start_time' => '11:00:00',
             'created_by' => 1,
         ]);
 
         Event::create([
             'name' => 'Easter Vigil',
             'date' => '2024-03-30',
+            'start_time' => '07:00:00',
             'created_by' => 1,
         ]);
 

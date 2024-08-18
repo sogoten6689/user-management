@@ -15,6 +15,7 @@ class CreateEventsTable extends Migration
             $table->id(); // Primary key
             $table->string('name'); // Name of the event
             $table->date('date'); // Date of the event
+            $table->time('start_time')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users');
             $table->timestamps(); // Created at and updated at

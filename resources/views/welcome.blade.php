@@ -65,7 +65,11 @@
                         @foreach($events as $key => $event)
                             <tr data-entry-id="{{ $event->id }}">
                                 <td>{{ ($event->name ?? '' )}}</td>
-                                <td>{{ ($event->date->format('d/m/Y') ?? '')}}</td>
+                                <td>{{ ($event->date->format('d/m/Y') ?? '')}}
+
+                                <br/>
+                                {{ $event->start_time->format('H:i') ?? '' }}
+                                </td>
                                 <td>
 
                                     @if($event->eventItems->isEmpty())

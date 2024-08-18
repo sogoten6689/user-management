@@ -50,6 +50,7 @@ class EventController extends Controller
             // 'name' => 'required|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/|max:255',
             'name' => 'required',
             'date' => 'required',
+            'start_time' => 'date_format:H:i',
             'event_items.*.item_type' => 'required|string|max:255',
             'event_items.*.music_id' => 'nullable|exists:music,id',
             'event_items.*.note' => 'nullable|string|max:255',
@@ -60,6 +61,7 @@ class EventController extends Controller
 
         $event->name = $request->name;
         $event->date = $request->date;
+        $event->start_time = $request->start_time;
         $event->created_by = $user->id;
 
         if ($event->save()) {
@@ -104,6 +106,7 @@ class EventController extends Controller
             // 'name' => 'required|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/|max:255',
             'name' => 'required',
             'date' => 'required',
+            'start_time' => 'date_format:H:i',
             'event_items.*.item_type' => 'required|string|max:255',
             'event_items.*.music_id' => 'nullable|exists:music,id',
             'event_items.*.note' => 'nullable|string|max:255',
@@ -116,6 +119,7 @@ class EventController extends Controller
             // Update event details
             $event->name = $request->input('name');
             $event->date = $request->input('date');
+            $event->start_time = $request->input('start_time');
             $event->save();
 
             // Retrieve existing event item IDs for deletion

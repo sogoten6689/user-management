@@ -49,6 +49,8 @@
                             </td>
                             <td>
                                 {{ $event->date->format('Y-m-d') ?? '' }}
+                                <br/>
+                                {{ $event->start_time->format('H:i') ?? '' }}
                             </td>
                             <td>{{ $event->creator->name ?? 'N/A' }}</td>
                             <td>
