@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
 class MusicController extends Controller
+
 {
     /**
      * Display a listing of the resource.
@@ -117,9 +118,11 @@ class MusicController extends Controller
     public function destroy(Music $music)
     {
 
-        if ($music->created_by == Auth::user()->id ) {
+        if ($music->created_by == Auth::user()->id || Auth::user()->hasRole(1)) {
             $music->delete();
             return redirect()->back()->with('success', 'File deleted successfully');
+        } else {
+            return redirect()->back()->with('error', 'You do not have permission to delete this file');
         }
     }
 }
