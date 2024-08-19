@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use App\Imports\MusicsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MusicController extends Controller
 
@@ -21,6 +23,26 @@ class MusicController extends Controller
         $musics = Music::latest()->paginate(15);
         return view('admin.musics.index', compact('musics'));
         //
+    }
+
+    // /**
+    //  * Show the form for creating a new resource.
+    //  */
+    // public function importView()
+    // {
+    //     return view('admin.musics.create');
+    //     //
+    // }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+
+        Excel::import(new MusicsImport, $request->file('file'));
+
+        return redirect()->route('admin.musics.index')->with('success', 'Music data imported successfully.');
     }
 
     /**
@@ -39,12 +61,12 @@ class MusicController extends Controller
     {
         $user = Auth::user();
 
-        $request->validate([
-            'name' => 'required',
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        // ]);
 
-        $music = new Music();
-        $music->name = $request->name;
+        // $music = new Music();
+        // $music->name = $request->name;
 
         $validatedData = $request->validate([
             'song_name' => 'required|string',
@@ -60,10 +82,17 @@ class MusicController extends Controller
 
         $validatedData['link_pdf'] = array_map('trim', explode(',', $request->input('link_pdf', '')));
         $validatedData['link_content'] = array_map('trim', explode(',', $request->input('link_content', '')));
+        $validatedData['created_by'] = $user->id;
 
+        // dd($validatedData);
         $music = Music::create($validatedData);
 
-        return redirect()->back()->with('success', 'File uploaded successfully');
+        if ($music->save()) {
+            flash()->addSuccess('Tạo Bài hát Thành Công!');
+            return redirect()->route('admin.musics.index');
+        }
+
+        return redirect()->back()->with('success', 'File uploaded fail!');
 
     }
 

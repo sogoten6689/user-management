@@ -9,21 +9,21 @@
             @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label for="song_name">Song Name</label>
+                    <label for="song_name">Tên bài hát*</label>
                     <input type="text" class="form-control @error('song_name') is-invalid @enderror" id="song_name" name="song_name" value="{{ old('song_name') }}" required>
                     @error('song_name')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="author">Author</label>
+                    <label for="author">Tác giả</label>
                     <input type="text" class="form-control @error('author') is-invalid @enderror" id="author" name="author" value="{{ old('author') }}">
                     @error('author')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="first_sentence">First Sentence</label>
+                    <label for="first_sentence">Câu đầu</label>
                     <input type="text" class="form-control @error('first_sentence') is-invalid @enderror" id="first_sentence" name="first_sentence" value="{{ old('first_sentence') }}">
                     @error('first_sentence')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -44,31 +44,31 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="category">Category</label>
+                    <label for="category">Loại</label>
                     <input type="text" class="form-control @error('category') is-invalid @enderror" id="category" name="category" value="{{ old('category') }}">
                     @error('category')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="book">Book</label>
+                    <label for="book">Sách</label>
                     <input type="text" class="form-control @error('book') is-invalid @enderror" id="book" name="book" value="{{ old('book') }}">
                     @error('book')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="notes">Notes</label>
+                    <label for="notes">Ghi chú</label>
                     <input type="text" class="form-control @error('notes') is-invalid @enderror" id="notes" name="notes" value="{{ old('notes') }}">
                     @error('notes')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="public">Public</label>
+                    <label for="public">Công khai</label>
                     <select class="form-control @error('public') is-invalid @enderror" id="public" name="public">
-                        <option value="1" {{ old('public') == '1' ? 'selected' : '' }}>Yes</option>
-                        <option value="0" {{ old('public') == '0' ? 'selected' : '' }}>No</option>
+                        <option value="1" {{ old('public') == '1' ? 'selected' : '' }}>Có</option>
+                        <option value="0" {{ old('public') == '0' ? 'selected' : '' }}>Không</option>
                     </select>
                     @error('public')
                         <div class="invalid-feedback">{{ $message }}</div>

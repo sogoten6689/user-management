@@ -34,6 +34,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::resource('categories', CategoryController::class);
     Route::resource('tags', TagController::class);
     Route::resource('musics', MusicController::class);
+    Route::post('/musics/import', [MusicController::class, 'import'])->name('musics.import');
     Route::resource('groups', GroupController::class);
     Route::resource('events', EventController::class);
 

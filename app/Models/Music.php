@@ -22,6 +22,7 @@ class Music extends Model
         'book',
         'notes',
         'public',
+        'created_by',
     ];
 
     protected $casts = [
