@@ -1,5 +1,12 @@
 # Laravel Admin Dashboard with Bootstrap 5.3
 
+server info
+sudo systemctl restart php8.1-fpm
+sudo systemctl restart nginx
+
+PHP 8.1.29
+10.48.12
+
 ## Features
 
 The Laravel Admin Dashboard is a web-based application that serves as a starting point for an Admin Dashboard panel, complete with User Management and Roles Permissions.
