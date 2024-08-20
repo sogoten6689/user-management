@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="col-3">
                                     <label for="music_id">Bài hát</label>
-                                    <select name="event_items[{{ $index }}][music_id]" class="form-control @error("event_items.$index.music_id") is-invalid @enderror">
+                                    <select name="event_items[{{ $index }}][music_id]" class="form-control select2 @error("event_items.$index.music_id") is-invalid @enderror">
                                         <option value="">Chọn bài hát</option>
                                         @foreach($musics as $music)
                                             <option value="{{ $music->id }}" {{ old("event_items.$index.music_id", $item->music_id) == $music->id ? 'selected' : '' }}>
@@ -152,7 +152,7 @@
                     </select>
                 </div>
                 <div class="col-3">
-                    <select name="event_items[${itemIndex}][music_id]" class="form-control">
+                    <select name="event_items[${itemIndex}][music_id]" class="form-control select2">
                         <option value="">Chọn bài hát</option>
                         @foreach($musics as $music)
                             <option value="{{ $music->id }}">{{ $music->song_name }}</option>
@@ -187,7 +187,13 @@
         itemNumbers.forEach((input, index) => {
             input.value = index + 1;
         });
+
+        $('.select2').select2();
     }
+
+    $(document).ready(function() {
+        $('.select2').select2();
+    });
 </script>
 @endsection
 

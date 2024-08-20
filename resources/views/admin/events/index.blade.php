@@ -9,7 +9,7 @@
             @can('permission_create')
                 <div class="float-end">
                     <a class="btn btn-success btn-sm text-white" href="{{ route("admin.events.create") }}">
-                        Thêm Chương TRình
+                        Thêm Chương Trình
                     </a>
                 </div>
             @endcan
