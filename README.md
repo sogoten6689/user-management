@@ -4,6 +4,13 @@ server info
 sudo systemctl restart php8.1-fpm
 sudo systemctl restart nginx
 
+database
+
+sudo service mysql start
+
+#use swap
+sudo dd if=/dev/zero of=/swapfile bs=1024 count=1024k 
+
 PHP 8.1.29
 10.48.12
 
