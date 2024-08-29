@@ -114,6 +114,7 @@
                                     <th>Tên bài hát</th>
                                     <th>Sách</th>
                                     <th>Tệp tập hát</th>
+                                    <th>Tệp âm thanh</th>
                                     <th>Ghi chú</th>
                                     @foreach($event->eventItems as $key => $item)
                                         <tr>
@@ -122,6 +123,7 @@
                                             @if($item->music)
                                                 <td><a href="{{ route('admin.musics.show', $item->music->id) }}">{{ $item->music->song_name }}</a></td>
                                                 {{-- <td>{{ $item->music->song_name }}</td> --}}
+                                                <td>{{ $item->music->book }}</td>
                                                 <td>
                                                     @if(is_array($item->music->link_pdf))
                                                         @foreach($item->music->link_pdf as $link)
@@ -143,6 +145,7 @@
                                                 </td>
 
                                             @else
+                                                <td>--</td>
                                                 <td>--</td>
                                                 <td>--</td>
                                                 <td>--</td>
