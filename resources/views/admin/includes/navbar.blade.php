@@ -1,8 +1,11 @@
 <header class="navbar sticky-top bg-light flex-md-nowrap p-0 shadow" data-bs-theme="light">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{{ route('admin.index') }}">{{ config('devstarit.app_name') }}</a>
+    <a class="navbar-brand p-2 col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{{ route('admin.index') }}">{{ config('devstarit.app_name') }}</a>
 
-    <ul class="navbar-nav flex-row d-md-none">
+    <ul class="navbar-nav flex-row px-3">
         <li class="nav-item text-nowrap">
+            <a class="nav-link" href="/">Trang Khách</a>
+        </li>
+        {{-- <li class="nav-item text-nowrap">
             <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false"
                     aria-label="Toggle search">
@@ -19,7 +22,7 @@
                     <use xlink:href="#list"/>
                 </svg>
             </button>
-        </li>
+        </li> --}}
     </ul>
 
     <div class="dropdown me-3 m-auto">
