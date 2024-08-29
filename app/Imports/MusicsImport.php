@@ -20,17 +20,19 @@ class MusicsImport implements ToModel, WithHeadingRow
         // dd($row);
         $user = Auth::user();
         // dd($user->id);
-        return new Music([
-            'song_name'     => $row['song_name'],
-            'author'        => $row['author'],
-            'first_verse'   => $row['first_verse'],
-            'link_pdf'      => explode(',', $row['link_pdf']),  // Assuming links are comma-separated
-            'link_content'  => explode(',', $row['link_content']),  // Assuming links are comma-separated
-            'category'      => $row['category'],
-            'book'          => $row['book'],
-            'note'          => $row['note'],
-            'public'        => $row['public'] == 'true', // Assuming 'true' or 'false' in Excel
-            'created_by'    => $user->id
-        ]);
+        if ($row['song_name'] != null && $row['song_name'] != '') {
+            return new Music([
+                'song_name'     => $row['song_name'],
+                'author'        => $row['author'],
+                'first_verse'   => $row['first_verse'],
+                'link_pdf'      => explode(',', $row['link_pdf']),  // Assuming links are comma-separated
+                'link_content'  => explode(',', $row['link_content']),  // Assuming links are comma-separated
+                'category'      => $row['category'],
+                'book'          => $row['book'],
+                'note'          => $row['note'],
+                'public'        => $row['public'] == 'true', // Assuming 'true' or 'false' in Excel
+                'created_by'    => $user->id
+            ]);
+        }
     }
 }
