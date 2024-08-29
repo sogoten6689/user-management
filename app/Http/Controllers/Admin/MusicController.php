@@ -17,10 +17,19 @@ class MusicController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('music_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $musics = Music::latest()->paginate(15);
+
+        $query = Music::query();
+
+        if ($request->filled('search')) {
+            $query->where('song_name', 'like', '%' . $request->input('search') . '%')
+                ->orWhere('author', 'like', '%' . $request->input('search') . '%');
+        }
+
+        $musics = $query->orderBy('created_at', 'desc')->paginate(15);
+
         return view('admin.musics.index', compact('musics'));
         //
     }
