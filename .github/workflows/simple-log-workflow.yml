@@ -1,0 +1,14 @@
+name: Simple Log Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  log:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Print a log message
+      run: echo "This is a simple log message"
