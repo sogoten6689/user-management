@@ -22,6 +22,6 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no lamnguyen@103.20.97.99 << 'EOF'
           cd /var/www/user-management
-          git pull origin main
+          sudo git pull origin main
           # Add any other deployment commands here
         EOF
